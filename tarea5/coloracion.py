@@ -1,4 +1,3 @@
-import random
 from typing import List, Tuple
 
 Intervalo = Tuple[int, int]
@@ -49,25 +48,9 @@ def coloracion_intervalo(I: List[Intervalo]) -> Tuple[int, List[Coloracion]]:
 
 
 def main():
-    # I: List[Intervalo] = list()
-    # rango_b = 0
-    # rango_e = 40
-    # for _ in range(7):
-    #     a = random.randint(rango_b, rango_e)
-    #     # b = random.randint(rango_b, rango_e)
-    #     # while b == a:
-    #     #     b = random.randint(rango_b, rango_e)
-    #     # if b < a:
-    #     #     a, b = b, a
-    #     I.append((a, a+5))
-
-    # I: List[Intervalo] = [
-    #     (1, 3), (4, 6), (2, 5), (0, 8), (9, 11)
-    # ]
     I: List[Intervalo] = [
-        (2, 7), (3, 8), (10, 15), (21, 26), (30, 35), (39, 44), (39, 44)
+        (1, 3), (4, 6), (2, 5), (0, 8), (9, 11)
     ]
-
     num_etiquetas, coloracion = coloracion_intervalo(I)
     print(f"Colores: {num_etiquetas}")
     print(f"Coloración: {coloracion}")
