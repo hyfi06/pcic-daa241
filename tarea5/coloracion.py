@@ -47,12 +47,27 @@ def coloracion_intervalo(I: List[Intervalo]) -> Tuple[int, List[Coloracion]]:
     return max_color+1, coloracion
 
 
+def contar_coloracion(I: List[Tuple[float, float]]):
+    if I == []:
+        return 0
+    I = sorted(I, key=lambda i: i[1])
+    color = 0
+    descarte = [I[0][1]]
+    for b, e in I[1:]:
+        if b > descarte[color]:
+            descarte[color] = e
+            color = (color+1) % len(descarte)
+        else:
+            descarte.append(e)
+    return len(descarte)
+
+
 def main():
     I: List[Intervalo] = [
         (1, 3), (4, 6), (2, 5), (0, 8), (9, 11)
     ]
     num_etiquetas, coloracion = coloracion_intervalo(I)
-    print(f"Colores: {num_etiquetas}")
+    print(f"Colores: {contar_coloracion(I)}")
     print(f"Coloración: {coloracion}")
     imprimir_intervalos(coloracion)
 
