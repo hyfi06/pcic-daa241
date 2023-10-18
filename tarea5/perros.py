@@ -33,9 +33,22 @@ def corrales_raros(P: List[Peso]) -> List[List[Peso]]:
     return corrales
 
 
+def contar_corrales(P: List[Peso]) -> int:
+    if P == []:
+        return 0
+    P = sorted(P)
+    corrales: int = 1
+    umbral = P[0] + 5
+    for peso in P[1:]:
+        if peso > umbral:
+            corrales += 1
+            umbral = peso + 5
+    return corrales
+
+
 def main():
     P = [7.1, 8.3, 24.1, 3.4, 10.4]
-    corrales = corrales_raros(P)
+    corrales = contar_corrales(P)
     print(corrales)
 
 

@@ -42,7 +42,7 @@ def coloracion_intervalo(I: List[Intervalo]) -> Tuple[int, List[Coloracion]]:
     return colores, coloracion
 
 
-def contar_coloracion(I: List[Tuple[float, float]]):
+def contar_coloracion(I: List[Intervalo]):
     n = len(I)
     if n == 0:
         return 0
