@@ -1,5 +1,5 @@
 from typing import List
-from random import shuffle, randint, sample
+from random import randint, sample
 
 
 def subSum(nums: List[int], k: int) -> bool:
@@ -39,7 +39,7 @@ def sum_subset_memo(idx: int, target: int, nums: List[int], cache: List[List[int
     return res
 
 
-def sum_subset_pd(target: int, nums: List[int]) -> bool:
+def sum_subset_pd(target: int, nums: List[int]) -> List[List[bool]]:
     print(f"{target} : {nums}")
     n = len(nums)
     table = [[False] * (target+1) for _ in range(n+1)]
@@ -54,7 +54,19 @@ def sum_subset_pd(target: int, nums: List[int]) -> bool:
                 table[i][j] = table[i-1][j-nums[i-1]] or table[i-1][j]
     print_table(target, n, table)
 
-    return table[n][target]
+    return table
+
+
+def recuperar_estructura(k, n, nums, table):
+    if table[n][k] == False:
+        return None
+    if k == 0:
+        return []
+    if recuperar_estructura(k, n-1, nums, table) == None:
+        idxs = recuperar_estructura(k-nums[n-1], n-1, nums, table)
+        idxs.append(n-1)
+        return idxs
+    return recuperar_estructura(k, n-1, nums, table)
 
 
 def print_table(k, n, table):
@@ -83,7 +95,8 @@ def main():
     lista: List[int] = sample(range(1, 20), randint(0, k-1))
     lista.sort()
     n = len(lista)
-    print(sum_subset_pd(k, lista))
+    table = sum_subset_pd(k, lista)
+    print(recuperar_estructura(k, n, lista, table))
 
 
 if __name__ == '__main__':
